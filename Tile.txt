@@ -1,0 +1,115 @@
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+
+public class Tile {
+
+	// private fields
+	private int x;
+	private int y;
+	private int width;
+	private int height;
+	private char number;
+	private Color tileColor;
+	private Boolean isSelected;
+
+	// constructor
+	public Tile(int x, int y, char number, Color tileColor) {
+		this.x = x;
+		this.y = y;
+		this.width = 60;
+		this.height = 60;
+		this.number = number;
+		this.tileColor = tileColor;
+		this.isSelected = false;
+	}
+
+	// getters and setters for each of the fields
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public char getNumber() {
+		return number;
+	}
+
+	public void setNumber(char number) {
+		this.number = number;
+	}
+
+	public Color getTileColor() {
+		return tileColor;
+	}
+
+	public void setTileColor(Color tileColor) {
+		this.tileColor = tileColor;
+	}
+	
+	public Boolean getIsSelected() {
+		return isSelected;
+	}
+
+	public void setIsSelected(Boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+
+	public void draw(Graphics g) {
+		g.setColor(tileColor);
+		g.fillRect(x, y, width, height);
+		
+		g.setColor(Color.BLACK);
+		
+		
+		g.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+		
+		if(number != 'e') {
+			g.drawString(number + "", x + width /2 - 9, y + height / 2 + 10);
+		}
+		
+
+		// g.setColor(Color.WHITE);
+		// g.fillRect(x, y, width, height);
+
+		// g.drawLine(x + x, y + y, width - width + x, height + y);
+		// g.drawLine(x + x, y + y, width + width , height);
+
+//		for (int i = 0; i < 6; i++) {
+//			g.drawLine(x, y, width - width, height);
+//			g.drawLine(x + width, y, width, height);
+//			g.drawLine(x, y, width, height - height);
+//			g.drawLine(x, y + height, width, height);
+//		}
+
+	}
+
+	
+}

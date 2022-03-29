@@ -1,0 +1,117 @@
+
+
+//required import statements
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+@SuppressWarnings("serial")
+//TODO: Change the name of the class from AnimationShell to the name of your class
+public class NerdleAnimation extends JPanel {
+
+	// TODO: set the initial width and height of your image
+	private static final int WIDTH = 800;
+	private static final int HEIGHT = 700;
+
+	// required global variables
+	private BufferedImage image;
+	private Graphics g;
+	private Timer timer;
+	private Grid grid; // TODO: change this to whatever object(s) you are animating
+	private Tile[] tile;
+	private String[] num;
+	
+	public Panel panel;
+
+	//construct
+	public NerdleAnimation() {
+		//init
+		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		g = image.getGraphics();
+		
+		//panel
+		this.panel = new Panel(130, 100);
+		
+		// set up and start the Timer
+		timer = new Timer(10, new TimerListener());
+		timer.start();
+
+		//mouse kb input
+		this.addMouseListener(new Mouse());
+		
+	}
+
+	// TimerListener class that is called repeatedly by the timer
+	private class TimerListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Color p = Color.PINK;
+			g.setColor(p);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
+			
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("Georgia Bold", Font.BOLD, 60));
+			g.drawString("Nerdle", 305, 60);
+			
+			panel.draw(g);
+			
+			repaint(); // leave this alone, it MUST be the last thing in this method
+		}
+
+	}
+
+	// do not modify this
+	public void paintComponent(Graphics g) {
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+	}
+
+	// main method with standard graphics code
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Nerdle");
+		frame.setSize(WIDTH, HEIGHT);
+		frame.setLocation(0, 0);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setContentPane(new NerdleAnimation()); // TODO: Change this to the name of your class!
+		frame.setVisible(true);
+	}
+	
+	//mouse
+	public class Mouse implements MouseListener {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			if(e.getButton() == 3) {
+				int mx = e.getX();
+				int my = e.getY();
+				
+				Tile t = panel.search(mx, my);
+				if(t != null) {
+					System.out.print("2");
+					t.setNumber('3');
+				}
+			}		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {}
+
+		@Override
+		public void mouseExited(MouseEvent e) {}
+	}
+}

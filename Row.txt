@@ -1,0 +1,39 @@
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class Row {
+	private int x;
+	private int y;
+	private Tile[] tiles = new Tile[8];
+	
+	public Row(int x, int y) {
+		this.y = y;
+		for(int i = 0; i < 8; i++) {
+			//e stands for empty, reference tile class 
+			tiles[i] = new Tile((i*70) + x, y, 'e', Color.white);
+		}
+	}
+	
+	public void draw(Graphics g) {
+		for(int i = 0; i < 8; i++) {
+			tiles[i].draw(g);
+		}
+	}
+	
+	public Tile search(int mx, int my) {
+		for(int i = 0; i < 8; i++) {
+			int dx = tiles[i].getX();
+			int dy = tiles[i].getY();
+			
+			System.out.print(2);
+			
+			if(mx > dx && mx < dx + 60 && my < dy && my > dy + 60) {
+				return tiles[i];
+			}
+		}
+		
+		return null;
+	}
+}
+
